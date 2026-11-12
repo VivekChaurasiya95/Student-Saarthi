@@ -61,3 +61,4 @@ foreach ($c in $crops) {
     
     Write-Output "Generated: $outPath (500x500)"
 }
+
