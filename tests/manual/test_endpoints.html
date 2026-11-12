@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Backend Connection Test</title>
+</head>
+<body>
+    <h1>Testing Backend Connection</h1>
+    <button onclick="test()">Click to Test</button>
+    <div id="result"></div>
+
+    <script>
+        async function test() {
+            const result = document.getElementById('result');
+            result.innerHTML = '<p>Testing...</p>';
+            
+            try {
+                // Test 1: Health
+                const health = await fetch('http://127.0.0.1:5000/api/health');
+                const healthData = await health.json();
+                result.innerHTML += '<p style="color:green">✅ Health: ' + healthData.status + '</p>';
+                
+                // Test 2: Scholarships
+                const scholarships = await fetch('http://127.0.0.1:5000/api/scholarships');
+                const schData = await scholarships.json();
+                result.innerHTML += '<p style="color:green">✅ Scholarships: ' + schData.length + ' found</p>';
+                
+                result.innerHTML += '<h2 style="color:green">🎉 Everything Works!</h2>';
+            } catch (error) {
+                result.innerHTML += '<p style="color:red">❌ Error: ' + error.message + '</p>';
+                result.innerHTML += '<p>Make sure:</p>';
+                result.innerHTML += '<ul><li>Backend is running (python app.py)</li>';
+                result.innerHTML += '<li>You opened this via http://127.0.0.1:8000/test.html</li></ul>';
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,153 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}Contact Us - Student Saarthi{% endblock %}
+
+{% block content %}
+<section class="page-header-banner">
+    <div class="container">
+        <h1 data-aos="fade-up">Contact Us</h1>
+        <p data-aos="fade-up" data-aos-delay="100">
+            Have questions about scholarships, portal support, or eligibility? We're here to help.
+        </p>
+    </div>
+</section>
+
+<section class="section" style="padding-top: 60px;">
+    <div class="container">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 48px; max-width: 1040px; margin: 0 auto;">
+            <!-- Contact Form -->
+            <div class="auth-glass-card" style="box-shadow: var(--shadow-md); padding: 36px;" data-aos="fade-right">
+                <h3 style="margin-bottom: 8px; font-size: 1.35rem;">Send Us a Message</h3>
+                <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 24px;">Our team typically responds within 24 hours.</p>
+
+                <div id="contactSuccess" class="success-message" style="display: none; background: rgba(5, 150, 105, 0.08); padding: 12px 16px; border-radius: var(--radius-md); margin-bottom: 20px; border-left: 3px solid var(--emerald-accent); color: var(--emerald-accent); font-size: 13.5px; font-weight: 500;"></div>
+                <div id="contactError" class="error-message" style="display: none; background: rgba(220, 38, 38, 0.08); padding: 12px 16px; border-radius: var(--radius-md); margin-bottom: 20px; border-left: 3px solid var(--error-color); color: var(--error-color); font-size: 13.5px; font-weight: 500;"></div>
+
+                <form id="contactForm" style="display: flex; flex-direction: column; gap: 18px;">
+                    <div class="form-group" style="margin: 0;">
+                        <label for="contactName">Your Full Name *</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-user"></i>
+                            <input type="text" id="contactName" placeholder="e.g. Rahul Sharma" required>
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin: 0;">
+                        <label for="contactEmail">Email Address *</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" id="contactEmail" placeholder="rahul@example.com" required>
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin: 0;">
+                        <label for="contactSubject">Subject *</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-heading"></i>
+                            <input type="text" id="contactSubject" placeholder="What is your question about?" required>
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin: 0;">
+                        <label for="contactMessage">Your Message *</label>
+                        <textarea id="contactMessage" placeholder="Type your question or message here..." required style="min-height: 120px; padding: 12px 16px; border: 1px solid var(--border-color); border-radius: var(--radius-md); width: 100%; background: var(--surface-color); color: var(--text-primary); font-family: inherit; font-size: 14px;"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-lg" style="margin-top: 8px;">
+                        <i class="fas fa-paper-plane"></i> Send Message
+                    </button>
+                </form>
+            </div>
+            
+            <!-- Contact Info Cards -->
+            <div data-aos="fade-left">
+                <h3 style="margin-bottom: 8px; font-size: 1.35rem;">Contact Information</h3>
+                <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 24px;">Direct support channels</p>
+
+                <div style="display: flex; flex-direction: column; gap: 20px;">
+                    <div class="feature-card" style="padding: 24px;">
+                        <div class="feature-icon-box" style="margin-bottom: 14px;">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <h4 style="margin-bottom: 4px; font-size: 1.1rem;">Email Us</h4>
+                        <p style="margin: 0; font-size: 14px; color: var(--text-secondary);">
+                            <a href="mailto:info@studentsaarthi.com" style="color: var(--brand-blue); font-weight: 600;">info@studentsaarthi.com</a><br>
+                            <a href="mailto:support@studentsaarthi.com" style="color: var(--brand-blue); font-weight: 600;">support@studentsaarthi.com</a>
+                        </p>
+                    </div>
+                    
+                    <div class="feature-card" style="padding: 24px;">
+                        <div class="feature-icon-box" style="margin-bottom: 14px; background: rgba(5,150,105,0.08); color: var(--emerald-accent); border-color: rgba(5,150,105,0.2);">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <h4 style="margin-bottom: 4px; font-size: 1.1rem;">Helpline</h4>
+                        <p style="margin: 0; font-size: 14px; color: var(--text-secondary);">
+                            +91 9234567890<br>
+                            <span style="font-size: 13px; color: var(--text-muted);">Monday &ndash; Saturday: 9:30 AM &ndash; 6:30 PM IST</span>
+                        </p>
+                    </div>
+                    
+                    <div class="feature-card" style="padding: 24px;">
+                        <div class="feature-icon-box" style="margin-bottom: 14px; background: rgba(217,119,6,0.08); color: var(--gold-accent); border-color: rgba(217,119,6,0.2);">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <h4 style="margin-bottom: 4px; font-size: 1.1rem;">Office Address</h4>
+                        <p style="margin: 0; font-size: 14px; color: var(--text-secondary);">
+                            Student Saarthi<br>
+                            Bhopal, Madhya Pradesh, 462001, India
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const form = document.getElementById('contactForm');
+        if (form) {
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const succ = document.getElementById('contactSuccess');
+                const err = document.getElementById('contactError');
+                succ.style.display = 'none';
+                err.style.display = 'none';
+
+                const payload = {
+                    name: document.getElementById('contactName').value.trim(),
+                    email: document.getElementById('contactEmail').value.trim(),
+                    subject: document.getElementById('contactSubject').value.trim(),
+                    message: document.getElementById('contactMessage').value.trim()
+                };
+
+                const btn = form.querySelector('button[type="submit"]');
+                btn.disabled = true;
+                btn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Sending message...';
+
+                try {
+                    const res = await fetch(`${window.location.origin}/api/contact`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+                    const data = await res.json();
+                    if (res.ok) {
+                        window.showToast('Message sent successfully!', 'success');
+                        succ.textContent = data.message || 'Thank you! Your message has been received.';
+                        succ.style.display = 'block';
+                        form.reset();
+                    } else {
+                        err.textContent = data.error || 'Failed to submit inquiry.';
+                        err.style.display = 'block';
+                    }
+                } catch (e) {
+                    err.textContent = 'Connection error. Please try again.';
+                    err.style.display = 'block';
+                } finally {
+                    btn.disabled = false;
+                    btn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
+                }
+            });
+        }
+    });
+</script>
+{% endblock %}

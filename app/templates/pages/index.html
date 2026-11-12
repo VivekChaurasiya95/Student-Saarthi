@@ -1,0 +1,206 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}Student Saarthi - Find and Apply for Scholarships in India{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="container">
+        <div class="hero-grid">
+            <div class="hero-content" data-aos="fade-up">
+                <h1 class="hero-title">
+                    Find and Apply for <span class="highlight">Scholarships</span> in India
+                </h1>
+                <p class="hero-description">
+                    Discover verified government, state, and private educational scholarships. Match your eligibility in seconds, submit your applications easily, and track your progress in real-time.
+                </p>
+                <div class="hero-actions">
+                    <a href="/scholarships.html" class="btn btn-primary btn-lg">
+                        <i class="fas fa-search"></i>
+                        Explore Scholarships
+                    </a>
+                    <a href="/signup.html" class="btn btn-outline btn-lg">
+                        <i class="fas fa-user-plus"></i>
+                        Register Free
+                    </a>
+                </div>
+                <div class="hero-stats-row" id="heroStats">
+                    <div class="hero-stat-item">
+                        <h3 id="totalScholarships">10+</h3>
+                        <p>Available Scholarships</p>
+                    </div>
+                    <div class="hero-stat-item">
+                        <h3 id="totalStudents">0+</h3>
+                        <p>Registered Students</p>
+                    </div>
+                    <div class="hero-stat-item">
+                        <h3 id="successRate">100%</h3>
+                        <p>Verified Programs</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hero Preview Card -->
+            <div class="hero-visual" data-aos="fade-left" data-aos-delay="150">
+                <div class="hero-preview-card">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                        <span class="scholarship-badge badge-academic">Central Government Scheme</span>
+                        <span style="font-size: 13px; color: var(--emerald-accent); font-weight: 700; display: inline-flex; align-items: center; gap: 6px;">
+                            <i class="fas fa-circle-check"></i> Actively Accepting
+                        </span>
+                    </div>
+                    <div style="font-size: 2rem; font-weight: 800; color: var(--text-primary); margin-bottom: 4px;">
+                        ₹75,000 <span style="font-size: 14px; font-weight: 500; color: var(--text-muted);">/ year</span>
+                    </div>
+                    <h3 style="margin-bottom: 8px; font-size: 1.25rem;">PM Special Scholarship Scheme</h3>
+                    <p style="font-size: 14px; color: var(--text-secondary); margin-bottom: 20px; line-height: 1.6;">
+                        Financial assistance for professional and general undergraduate courses across recognized institutions in India.
+                    </p>
+                    <div class="scholarship-meta-pills" style="margin-bottom: 24px;">
+                        <span class="meta-pill"><i class="fas fa-graduation-cap"></i> Undergraduate</span>
+                        <span class="meta-pill"><i class="fas fa-percent"></i> Min 60%</span>
+                        <span class="meta-pill"><i class="fas fa-location-dot"></i> Pan-India</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-color); padding-top: 16px;">
+                        <span class="deadline-chip"><i class="fas fa-clock"></i> Closes in 45 days</span>
+                        <a href="/scholarships.html" class="btn btn-primary btn-sm">
+                            View Details <i class="fas fa-chevron-right" style="font-size: 11px;"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="section" style="background: var(--bg-secondary);">
+    <div class="container">
+        <div class="section-header" data-aos="fade-up">
+            <h2>Everything You Need to Secure Your Scholarship</h2>
+            <p>From discovering opportunities to tracking application decisions, all in one place</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card" data-aos="fade-up" data-aos-delay="50">
+                <div class="feature-icon-box">
+                    <i class="fas fa-filter"></i>
+                </div>
+                <h3>Smart Eligibility Matching</h3>
+                <p>Filter scholarships based on your academic percentage, current education level, domicile state, reservation category, and family income.</p>
+            </div>
+            <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="feature-icon-box">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3>100% Verified Schemes</h3>
+                <p>Every scholarship listed on the portal is verified against official government notifications and approved CSR foundation guidelines.</p>
+            </div>
+            <div class="feature-card" data-aos="fade-up" data-aos-delay="150">
+                <div class="feature-icon-box">
+                    <i class="fas fa-file-signature"></i>
+                </div>
+                <h3>Simple Application Process</h3>
+                <p>Save time with a reusable student profile. Enter your academic qualifications and documents once and apply smoothly.</p>
+            </div>
+            <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="feature-icon-box">
+                    <i class="fas fa-clock-rotate-left"></i>
+                </div>
+                <h3>Real-Time Tracking</h3>
+                <p>Follow your application lifecycle step-by-step from submission to verification and approval with transparent status updates.</p>
+            </div>
+            <div class="feature-card" data-aos="fade-up" data-aos-delay="250">
+                <div class="feature-icon-box">
+                    <i class="fas fa-bookmark"></i>
+                </div>
+                <h3>Save to Wishlist</h3>
+                <p>Bookmark scholarships to your personal dashboard and organize your required documents and marksheets ahead of deadlines.</p>
+            </div>
+            <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="feature-icon-box">
+                    <i class="fas fa-bell"></i>
+                </div>
+                <h3>Deadline Reminders</h3>
+                <p>Clear deadline countdowns keep you aware of closing dates so you never miss an important opportunity.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Featured Scholarships Section -->
+<section class="section">
+    <div class="container">
+        <div class="section-header" data-aos="fade-up">
+            <h2>Featured Scholarship Programs</h2>
+            <p>Active central, state, and foundation opportunities currently accepting applications</p>
+        </div>
+        
+        <div class="scholarships-grid" id="featuredScholarships" data-aos="fade-up" data-aos-delay="100">
+            <div class="empty-state" style="grid-column: 1 / -1; text-align: center; padding: 48px;">
+                <span class="loading"></span>
+                <p style="margin-top: 12px; color: var(--text-secondary);">Loading verified scholarship listings...</p>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 48px;" data-aos="fade-up">
+            <a href="/scholarships.html" class="btn btn-outline btn-lg">
+                View All Scholarships
+                <i class="fas fa-arrow-right" style="margin-left: 8px;"></i>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- How It Works Section -->
+<section class="section" style="background: var(--bg-secondary);">
+    <div class="container">
+        <div class="section-header" data-aos="fade-up">
+            <h2>How Student Saarthi Works</h2>
+            <p>Three simple steps from discovery to application submission</p>
+        </div>
+        <div class="timeline-steps-grid">
+            <div class="step-card" data-aos="fade-up" data-aos-delay="50">
+                <div class="step-number-ring">1</div>
+                <h3>Create Your Profile</h3>
+                <p>Register with your basic student information, academic percentage, current education level, and category.</p>
+            </div>
+            <div class="step-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="step-number-ring">2</div>
+                <h3>Check Your Eligibility</h3>
+                <p>Our matching filters instantly show you scholarships you qualify for based on your marks and income criteria.</p>
+            </div>
+            <div class="step-card" data-aos="fade-up" data-aos-delay="150">
+                <div class="step-number-ring">3</div>
+                <h3>Apply & Track Status</h3>
+                <p>Submit your application with your Statement of Purpose and documents, then follow your review status directly.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- High-Contrast Reliable Call-To-Action Banner -->
+<section class="section" style="padding: 80px 0;">
+    <div class="container">
+        <div class="cta-banner-card" data-aos="zoom-in">
+            <h2>Ready to Fund Your Education?</h2>
+            <p>
+                Join students across India finding verified scholarships through Student Saarthi. Create your profile and start applying today.
+            </p>
+            <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+                <a href="/signup.html" class="btn btn-primary btn-lg">
+                    <i class="fas fa-user-plus"></i>
+                    Get Started Free
+                </a>
+                <a href="/scholarships.html" class="btn btn-outline btn-lg">
+                    <i class="fas fa-search"></i>
+                    Browse Scholarships
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="{{ url_for('static', filename='js/index.js') }}"></script>
+{% endblock %}

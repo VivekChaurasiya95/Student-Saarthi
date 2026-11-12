@@ -1,0 +1,162 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}{{ scholarship.name }} - Student Saarthi{% endblock %}
+
+{% block content %}
+<section class="section" style="padding-top: 40px; padding-bottom: 80px;">
+    <div class="container" style="max-width: 960px;">
+        
+        <!-- Breadcrumbs Navigation -->
+        <nav style="display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--text-muted); margin-bottom: 24px;" aria-label="Breadcrumb">
+            <a href="/" style="color: var(--text-secondary);"><i class="fas fa-home"></i> Home</a>
+            <span>/</span>
+            <a href="/scholarships.html" style="color: var(--text-secondary);">Scholarships</a>
+            <span>/</span>
+            <span style="color: var(--text-primary); font-weight: 600;">{{ scholarship.name }}</span>
+        </nav>
+
+        <!-- Main Card -->
+        <div style="background: var(--surface-color); border: 1px solid var(--border-color); border-radius: var(--radius-xl); padding: 36px; box-shadow: var(--shadow-md);" data-aos="fade-up">
+
+            <!-- Top Header Meta -->
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 20px; margin-bottom: 28px; border-bottom: 1px solid var(--border-color); padding-bottom: 24px;">
+                <div style="max-width: 620px;">
+                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px; flex-wrap: wrap;">
+                        <span class="scholarship-badge badge-academic">{{ scholarship.category }}</span>
+                        {% if scholarship.is_verified %}
+                            <span class="status-pill status-approved"><i class="fas fa-check-circle"></i> Verified Scheme</span>
+                        {% endif %}
+                    </div>
+                    <h1 style="font-size: clamp(1.8rem, 3.5vw, 2.4rem); color: var(--text-primary); margin-bottom: 10px; font-weight: 800; letter-spacing: -0.02em;">
+                        {{ scholarship.name }}
+                    </h1>
+                    <p style="color: var(--text-secondary); font-size: 15px; display: flex; align-items: center; gap: 8px; margin: 0;">
+                        <i class="fas fa-building-columns" style="color: var(--brand-blue);"></i>
+                        <strong>{{ scholarship.provider }}</strong>
+                        {% if scholarship.state %}
+                            <span style="color: var(--text-muted);">&bull;</span>
+                            <span style="color: var(--text-secondary);"><i class="fas fa-location-dot"></i> {{ scholarship.state }}</span>
+                        {% endif %}
+                    </p>
+                </div>
+                
+                <div style="text-align: right; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 16px 24px;">
+                    <div style="font-size: 2.2rem; font-weight: 800; color: var(--brand-blue); line-height: 1;">
+                        ₹{{ "{:,.0f}".format(scholarship.amount) }}
+                    </div>
+                    <div style="font-size: 12px; color: var(--text-muted); font-weight: 600; text-transform: uppercase; margin-top: 4px;">
+                        Scholarship Amount
+                    </div>
+                </div>
+            </div>
+
+            <!-- Key Program Indicators Grid -->
+            <div style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 32px;">
+                <div>
+                    <span style="color: var(--text-muted); font-size: 12px; font-weight: 600; text-transform: uppercase;">Application Deadline</span>
+                    <p style="font-size: 15px; font-weight: 700; margin-top: 4px; color: var(--text-primary);">
+                        <i class="fas fa-calendar-day" style="color: var(--brand-blue); margin-right: 6px;"></i>
+                        {{ scholarship.deadline or 'Open Ongoing' }}
+                    </p>
+                </div>
+                <div>
+                    <span style="color: var(--text-muted); font-size: 12px; font-weight: 600; text-transform: uppercase;">Minimum Marks</span>
+                    <p style="font-size: 15px; font-weight: 700; margin-top: 4px; color: var(--text-primary);">
+                        <i class="fas fa-award" style="color: var(--gold-accent); margin-right: 6px;"></i>
+                        {{ scholarship.min_percentage }}% Minimum
+                    </p>
+                </div>
+                <div>
+                    <span style="color: var(--text-muted); font-size: 12px; font-weight: 600; text-transform: uppercase;">Students Applied</span>
+                    <p style="font-size: 15px; font-weight: 700; margin-top: 4px; color: var(--text-primary);">
+                        <i class="fas fa-users" style="color: var(--emerald-accent); margin-right: 6px;"></i>
+                        {{ scholarship.current_applicants }} Applied
+                    </p>
+                </div>
+            </div>
+
+            <!-- Overview Section -->
+            <div style="margin-bottom: 32px;">
+                <h3 style="font-size: 1.25rem; margin-bottom: 12px; color: var(--text-primary);">
+                    Overview
+                </h3>
+                <p style="color: var(--text-secondary); line-height: 1.8; font-size: 15px;">
+                    {{ scholarship.description }}
+                </p>
+            </div>
+
+            <!-- Eligibility Criteria -->
+            <div style="margin-bottom: 32px; background: var(--bg-secondary); border-radius: var(--radius-lg); padding: 24px; border: 1px solid var(--border-color);">
+                <h3 style="font-size: 1.2rem; margin-bottom: 16px; color: var(--text-primary);">
+                    <i class="fas fa-check-circle" style="color: var(--brand-blue); margin-right: 8px;"></i>
+                    Eligibility Criteria
+                </h3>
+                <ul style="color: var(--text-secondary); line-height: 2; margin: 0; list-style: none; padding: 0; font-size: 14.5px;">
+                    <li><i class="fas fa-check" style="color: var(--emerald-accent); margin-right: 8px;"></i>Minimum Marks: <strong>{{ scholarship.min_percentage }}%</strong> in previous examination</li>
+                    <li><i class="fas fa-check" style="color: var(--emerald-accent); margin-right: 8px;"></i>Eligible Education Levels: <strong>{{ scholarship.education_levels or 'All recognized levels' }}</strong></li>
+                    <li><i class="fas fa-check" style="color: var(--emerald-accent); margin-right: 8px;"></i>Category: <strong>{{ scholarship.eligible_categories or 'Open to all categories' }}</strong></li>
+                    {% if scholarship.max_income %}
+                        <li><i class="fas fa-check" style="color: var(--emerald-accent); margin-right: 8px;"></i>Family Annual Income: Under <strong>₹{{ "{:,.0f}".format(scholarship.max_income) }}</strong></li>
+                    {% endif %}
+                    {% if scholarship.age_limit %}
+                        <li><i class="fas fa-check" style="color: var(--emerald-accent); margin-right: 8px;"></i>Age Limit: Under <strong>{{ scholarship.age_limit }} Years</strong></li>
+                    {% endif %}
+                </ul>
+            </div>
+
+            <!-- Required Documents -->
+            <div style="margin-bottom: 36px;">
+                <h3 style="font-size: 1.2rem; margin-bottom: 16px; color: var(--text-primary);">
+                    <i class="fas fa-folder-open" style="color: var(--gold-accent); margin-right: 8px;"></i>
+                    Required Documents
+                </h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px;">
+                    {% if scholarship.required_documents %}
+                        {% for doc in scholarship.required_documents.split(',') %}
+                            <div style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 12px 16px; display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--text-primary); font-weight: 500;">
+                                <i class="fas fa-file-pdf" style="color: var(--brand-blue);"></i>
+                                <span>{{ doc.strip() }}</span>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <div style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 12px 16px; display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--text-primary); font-weight: 500;">
+                            <i class="fas fa-file-pdf" style="color: var(--brand-blue);"></i>
+                            <span>Marksheet of Qualifying Examination</span>
+                        </div>
+                        <div style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 12px 16px; display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--text-primary); font-weight: 500;">
+                            <i class="fas fa-file-pdf" style="color: var(--brand-blue);"></i>
+                            <span>Government ID Proof (Aadhaar / Voter ID)</span>
+                        </div>
+                        <div style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 12px 16px; display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--text-primary); font-weight: 500;">
+                            <i class="fas fa-file-pdf" style="color: var(--brand-blue);"></i>
+                            <span>Family Income Certificate</span>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            {% if scholarship.official_url %}
+                <div style="background: rgba(37, 99, 235, 0.05); border: 1px solid rgba(37, 99, 235, 0.2); padding: 16px 20px; border-radius: var(--radius-md); margin-bottom: 36px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+                    <div style="display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--text-primary);">
+                        <i class="fas fa-link" style="color: var(--brand-blue);"></i>
+                        <span>Official Source: <strong>{{ scholarship.official_source or 'Government Portal' }}</strong></span>
+                    </div>
+                    <a href="{{ scholarship.official_url }}" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-ghost" style="color: var(--brand-blue);">
+                        Visit Official Website <i class="fas fa-arrow-up-right-from-square" style="font-size: 11px;"></i>
+                    </a>
+                </div>
+            {% endif %}
+
+            <!-- Actions -->
+            <div style="display: flex; gap: 16px; flex-wrap: wrap; border-top: 1px solid var(--border-color); padding-top: 28px;">
+                <a href="/apply?id={{ scholarship.id }}" class="btn btn-primary btn-lg" style="flex: 2; text-align: center;">
+                    <i class="fas fa-paper-plane"></i> Apply for This Scholarship
+                </a>
+                <a href="/scholarships.html" class="btn btn-outline btn-lg" style="flex: 1; text-align: center;">
+                    <i class="fas fa-arrow-left"></i> Back to Scholarships
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

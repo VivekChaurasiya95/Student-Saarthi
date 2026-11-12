@@ -1,0 +1,101 @@
+# ==============================================================================
+# STUDENT SAARTHI - GITIGNORE (SECURITY & SECRETS PROTECTION)
+# ==============================================================================
+
+# ------------------------------------------------------------------------------
+# 1. Environment & Sensitive Credentials
+# ------------------------------------------------------------------------------
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.cert
+*.crt
+*.pfx
+*.p12
+id_rsa
+id_rsa.pub
+
+# ------------------------------------------------------------------------------
+# 2. Deployment & Local Cloud Credentials
+# ------------------------------------------------------------------------------
+.antideploy.json
+scripts/inspect_secrets.py
+scripts/antideploy_poll.py
+
+# ------------------------------------------------------------------------------
+# 3. Legacy Drafts & Scratch Notes (Prevents legacy hardcoded credentials leak)
+# ------------------------------------------------------------------------------
+docs/legacy_drafts/
+
+# ------------------------------------------------------------------------------
+# 4. Database & Storage Assets
+# ------------------------------------------------------------------------------
+instance/
+instance/database/*.db
+instance/database/*.sqlite
+instance/database/*.sqlite3
+*.db
+*.sqlite
+*.sqlite3
+
+# Uploaded User & Student Documents (Aadhaar, income certificates, marksheets)
+static/documents/uploads/*
+!static/documents/uploads/.gitkeep
+
+# ------------------------------------------------------------------------------
+# 5. Logs & Telemetry
+# ------------------------------------------------------------------------------
+logs/
+*.log
+
+# ------------------------------------------------------------------------------
+# 6. Python Runtime & Virtual Environments
+# ------------------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+.venv/
+venv/
+ENV/
+env/
+
+# ------------------------------------------------------------------------------
+# 7. Testing & Coverage
+# ------------------------------------------------------------------------------
+.pytest_cache/
+.coverage
+htmlcov/
+
+# ------------------------------------------------------------------------------
+# 8. Editor & Operating System Caches
+# ------------------------------------------------------------------------------
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+desktop.ini

@@ -1,0 +1,115 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}Login - Student Saarthi{% endblock %}
+
+{% block content %}
+<div class="auth-page-wrapper">
+    <div class="auth-glass-card" data-aos="zoom-in">
+        <div class="auth-header">
+            <h2 style="font-size: 1.85rem; letter-spacing: -0.02em; color: var(--text-primary); margin-bottom: 6px; font-weight: 800;">
+                Welcome Back
+            </h2>
+            <p style="margin: 0; color: var(--text-secondary); font-size: 14.5px;">
+                Access your dashboard and application status
+            </p>
+        </div>
+
+        <!-- Role Toggle Selector -->
+        <div style="display: flex; gap: 10px; margin-bottom: 28px; background: var(--bg-secondary); padding: 4px; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+            <button class="btn btn-primary" id="studentLoginBtn" style="flex: 1; padding: 10px 14px; font-size: 13.5px;" type="button">
+                <i class="fas fa-user-graduate"></i> Student Login
+            </button>
+            <button class="btn btn-ghost" id="adminLoginBtn" style="flex: 1; padding: 10px 14px; font-size: 13.5px; font-weight: 600;" type="button">
+                <i class="fas fa-user-shield"></i> Admin Portal
+            </button>
+        </div>
+
+        <!-- Notification Alerts -->
+        <div id="errorMessage" class="error-message" style="display: none; background: rgba(220, 38, 38, 0.08); padding: 12px 16px; border-radius: var(--radius-md); margin-bottom: 20px; border-left: 3px solid var(--error-color); color: var(--error-color); font-size: 13.5px; font-weight: 600;"></div>
+        <div id="successMessage" class="success-message" style="display: none; background: rgba(5, 150, 105, 0.08); padding: 12px 16px; border-radius: var(--radius-md); margin-bottom: 20px; border-left: 3px solid var(--emerald-accent); color: var(--emerald-accent); font-size: 13.5px; font-weight: 600;"></div>
+
+        <!-- Student Login Form -->
+        <form id="studentLoginForm">
+            <div class="form-group">
+                <label for="studentEmail">Student Email</label>
+                <div class="input-with-icon">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" id="studentEmail" placeholder="student@example.com" required autocomplete="email">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="studentPassword">Password</label>
+                <div class="input-with-icon">
+                    <i class="fas fa-key"></i>
+                    <input type="password" id="studentPassword" placeholder="Enter your password" required autocomplete="current-password">
+                </div>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; font-size: 13.5px;">
+                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; color: var(--text-secondary);">
+                    <input type="checkbox" id="rememberMe" style="accent-color: var(--brand-blue);">
+                    <span>Remember me</span>
+                </label>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;">
+                <i class="fas fa-sign-in-alt"></i> Login to Dashboard
+            </button>
+        </form>
+
+        <!-- Admin Login Form -->
+        <form id="adminLoginForm" style="display: none;">
+            <div class="form-group">
+                <label for="adminUsername">Admin Username</label>
+                <div class="input-with-icon">
+                    <i class="fas fa-user-shield"></i>
+                    <input type="text" id="adminUsername" placeholder="e.g. admin" required autocomplete="username">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="adminPassword">Password</label>
+                <div class="input-with-icon">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="adminPassword" placeholder="Enter admin password" required autocomplete="current-password">
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-dark btn-lg" style="width: 100%; margin-top: 8px;">
+                <i class="fas fa-shield-alt"></i> Admin Login
+            </button>
+        </form>
+
+        <!-- Google Sign-In Integration Container -->
+        <div id="googleSignInContainer" style="margin-top: 24px;">
+            <div style="display: flex; align-items: center; gap: 16px; margin: 24px 0;">
+                <div style="flex: 1; height: 1px; background: var(--border-color);"></div>
+                <span style="color: var(--text-muted); font-size: 12px; font-weight: 700; text-transform: uppercase;">Or</span>
+                <div style="flex: 1; height: 1px; background: var(--border-color);"></div>
+            </div>
+
+            <div id="g_id_onload"
+                 data-client_id="{{ google_client_id }}"
+                 data-callback="handleGoogleSignIn">
+            </div>
+            <div class="g_id_signin" data-type="standard" data-width="100%" data-shape="rectangular" data-theme="outline"></div>
+
+            <div id="googleBlockedNotice" style="display: none; padding: 12px 14px; background: var(--bg-secondary); border-radius: var(--radius-md); font-size: 13px; color: var(--text-secondary); text-align: center; border: 1px solid var(--border-color); margin-top: 14px;">
+                <i class="fas fa-shield-alt" style="color: var(--warning-color); margin-right: 6px;"></i>
+                Google Sign-In was blocked by your browser's ad blocker or shield. You can log in using your email and password above, or pause your ad blocker for this site.
+            </div>
+        </div>
+
+        <p style="text-align: center; margin-top: 28px; color: var(--text-secondary); font-size: 14px;">
+            Don't have an account yet? 
+            <a href="/signup.html" style="color: var(--brand-blue); font-weight: 700;">Create an Account</a>
+        </p>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="{{ url_for('static', filename='js/login.js') }}?v=2.3"></script>
+<script src="https://accounts.google.com/gsi/client" async defer onerror="if(window.handleGoogleGsiBlocked)window.handleGoogleGsiBlocked()"></script>
+{% endblock %}

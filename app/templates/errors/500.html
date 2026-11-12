@@ -1,0 +1,27 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}Server Error - Student Saarthi{% endblock %}
+
+{% block content %}
+<section class="section" style="margin-top: 100px; text-align: center; min-height: 60vh; display: flex; align-items: center;">
+    <div class="container">
+        <div style="max-width: 600px; margin: 0 auto;">
+            <i class="fas fa-exclamation-triangle" style="font-size: 80px; color: var(--warning-color); margin-bottom: 24px;"></i>
+            <h1 style="font-size: 48px; margin-bottom: 16px;">500</h1>
+            <h2 style="margin-bottom: 16px;">Internal Server Error</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 32px; font-size: 18px;">
+                Something went wrong on our end. Please try refreshing the page or check back later.
+            </p>
+            <div style="display: flex; gap: 16px; justify-content: center;">
+                <a href="/" class="btn btn-primary">
+                    <i class="fas fa-home"></i> Back to Home
+                </a>
+                <a href="/contact.html" class="btn btn-outline">
+                    <i class="fas fa-envelope"></i> Contact Support
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+

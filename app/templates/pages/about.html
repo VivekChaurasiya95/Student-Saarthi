@@ -1,0 +1,107 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}About Us - Student Saarthi{% endblock %}
+
+{% block content %}
+<!-- Page Header Banner -->
+<section class="page-header-banner">
+    <div class="container">
+        <h1 data-aos="fade-up">About Student Saarthi</h1>
+        <p data-aos="fade-up" data-aos-delay="100">
+            Dedicated to helping students across India discover, check eligibility, and apply for government and private scholarships without barriers.
+        </p>
+    </div>
+</section>
+
+<!-- Mission, Vision & Values Section -->
+<section class="section" style="padding-top: 60px;">
+    <div class="container">
+        <div class="features-grid" style="margin-bottom: 64px;">
+            <div class="feature-card" data-aos="fade-up" data-aos-delay="50">
+                <div class="feature-icon-box">
+                    <i class="fas fa-bullseye"></i>
+                </div>
+                <h3>Our Mission</h3>
+                <p>To eliminate financial obstacles to education by connecting students directly with verified central, state, and private scholarship programs through a simple, transparent portal.</p>
+            </div>
+
+            <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="feature-icon-box" style="background: rgba(5,150,105,0.08); color: var(--emerald-accent); border-color: rgba(5,150,105,0.2);">
+                    <i class="fas fa-eye"></i>
+                </div>
+                <h3>Our Vision</h3>
+                <p>An India where no deserving student has to discontinue their education due to lack of financial guidance, complex paperwork, or missed scholarship application dates.</p>
+            </div>
+
+            <div class="feature-card" data-aos="fade-up" data-aos-delay="150">
+                <div class="feature-icon-box" style="background: rgba(217,119,6,0.08); color: var(--gold-accent); border-color: rgba(217,119,6,0.2);">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3>Our Promise</h3>
+                <p>100% verified opportunities, authentic government links, and a free platform for students with complete data privacy.</p>
+            </div>
+        </div>
+
+        <!-- Leadership & Team Section -->
+        <div class="section-header" data-aos="fade-up">
+            <h2>The Student Saarthi Team</h2>
+            <p>Engineers and student advocates passionate about education access</p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 32px; margin-bottom: 80px;" data-aos="fade-up" data-aos-delay="100">
+            
+            <!-- Vivek Chaurasiya -->
+            <div class="feature-card" style="text-align: center; padding: 36px 24px;">
+                <div style="width: 80px; height: 80px; border-radius: 50%; background: rgba(37,99,235,0.08); border: 2px solid rgba(37,99,235,0.2); color: var(--brand-blue); font-size: 32px; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;">
+                    <i class="fas fa-user-gear"></i>
+                </div>
+                <h3 style="margin-bottom: 4px; font-size: 1.3rem; color: var(--text-primary);">Vivek Chaurasiya</h3>
+                <p style="color: var(--brand-blue); font-weight: 700; font-size: 14px; margin-bottom: 12px;">Founder & Lead Architect</p>
+                <p style="font-size: 14px; color: var(--text-secondary); line-height: 1.6; margin: 0;">
+                    Leads application design, full-stack development, and deployment engineering.
+                </p>
+            </div>
+
+            <!-- Prajwal Patidar -->
+            <div class="feature-card" style="text-align: center; padding: 36px 24px;">
+                <div style="width: 80px; height: 80px; border-radius: 50%; background: rgba(5,150,105,0.08); border: 2px solid rgba(5,150,105,0.2); color: var(--emerald-accent); font-size: 32px; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;">
+                    <i class="fas fa-database"></i>
+                </div>
+                <h3 style="margin-bottom: 4px; font-size: 1.3rem; color: var(--text-primary);">Prajwal Patidar</h3>
+                <p style="color: var(--emerald-accent); font-weight: 700; font-size: 14px; margin-bottom: 12px;">Database Management & Architecture</p>
+                <p style="font-size: 14px; color: var(--text-secondary); line-height: 1.6; margin: 0;">
+                    Manages database schemas, relational models, query performance, and data security.
+                </p>
+            </div>
+
+            <!-- Atul Dehariya -->
+            <div class="feature-card" style="text-align: center; padding: 36px 24px;">
+                <div style="width: 80px; height: 80px; border-radius: 50%; background: rgba(217,119,6,0.08); border: 2px solid rgba(217,119,6,0.2); color: var(--gold-accent); font-size: 32px; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;">
+                    <i class="fas fa-laptop-code"></i>
+                </div>
+                <h3 style="margin-bottom: 4px; font-size: 1.3rem; color: var(--text-primary);">Atul Dehariya</h3>
+                <p style="color: var(--gold-accent); font-weight: 700; font-size: 14px; margin-bottom: 12px;">Scholarship Research & Operations</p>
+                <p style="font-size: 14px; color: var(--text-secondary); line-height: 1.6; margin: 0;">
+                    Coordinates scholarship data research, eligibility criteria verification, and operations.
+                </p>
+            </div>
+        </div>
+
+        <!-- High-Contrast Call to Action Box -->
+        <div class="cta-banner-card" data-aos="zoom-in">
+            <h2>Ready to Explore Scholarships?</h2>
+            <p>
+                Browse through verified government, state, and foundation scholarships to fund your higher education.
+            </p>
+            <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+                <a href="/scholarships.html" class="btn btn-primary btn-lg">
+                    <i class="fas fa-search"></i> Browse Scholarships
+                </a>
+                <a href="/contact.html" class="btn btn-outline btn-lg">
+                    <i class="fas fa-envelope"></i> Contact Us
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

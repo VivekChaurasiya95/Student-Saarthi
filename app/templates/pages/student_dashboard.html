@@ -1,0 +1,196 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}Student Dashboard - Student Saarthi{% endblock %}
+
+{% block content %}
+<div class="dashboard-page-container">
+    <div class="container">
+        
+        <!-- Welcome Header -->
+        <div class="dashboard-header-bar" data-aos="fade-down">
+            <div>
+                <h1 style="font-size: clamp(1.8rem, 3.5vw, 2.5rem); margin-bottom: 6px; font-weight: 800; letter-spacing: -0.02em;">
+                    Welcome back, <span id="userName" style="color: var(--brand-blue);">Student</span>
+                </h1>
+                <p style="margin: 0; color: var(--text-secondary); font-size: 15px;">
+                    Track your applications, saved scholarships, and personalized recommendations.
+                </p>
+            </div>
+            <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+                <a href="/scholarships.html" class="btn btn-primary">
+                    <i class="fas fa-search"></i> Browse Scholarships
+                </a>
+                <a href="/my-applications" class="btn btn-outline">
+                    <i class="fas fa-folder"></i> My Applications
+                </a>
+            </div>
+        </div>
+
+        <!-- Metric KPI Cards -->
+        <div class="dashboard-stats-grid" data-aos="fade-up" data-aos-delay="50">
+            <div class="stat-card-executive">
+                <div>
+                    <div class="stat-metric-value" id="totalScholarships">10+</div>
+                    <div class="stat-metric-label">Available Scholarships</div>
+                </div>
+                <div class="stat-icon-container stat-icon-blue">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+            </div>
+
+            <div class="stat-card-executive">
+                <div>
+                    <div class="stat-metric-value" id="myApplications">0</div>
+                    <div class="stat-metric-label">Applications Submitted</div>
+                </div>
+                <div class="stat-icon-container stat-icon-emerald">
+                    <i class="fas fa-file-alt"></i>
+                </div>
+            </div>
+
+            <div class="stat-card-executive">
+                <div>
+                    <div class="stat-metric-value" id="bookmarkedScholarships">0</div>
+                    <div class="stat-metric-label">Saved Scholarships</div>
+                </div>
+                <div class="stat-icon-container stat-icon-amber">
+                    <i class="fas fa-bookmark"></i>
+                </div>
+            </div>
+
+            <div class="stat-card-executive">
+                <div>
+                    <div class="stat-metric-value" id="profileCompletion">85%</div>
+                    <div class="stat-metric-label">Profile Completion</div>
+                </div>
+                <div class="stat-icon-container stat-icon-blue">
+                    <i class="fas fa-circle-check"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Interactive Analytics & Action Hub Grid -->
+        <div style="display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 28px; margin-bottom: 48px;" data-aos="fade-up" data-aos-delay="100">
+            
+            <!-- Quick Actions Hub -->
+            <div style="background: var(--surface-color); border: 1px solid var(--border-color); border-radius: var(--radius-xl); padding: 32px; box-shadow: var(--shadow-subtle);">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <i class="fas fa-bolt" style="color: var(--gold-accent); font-size: 18px;"></i>
+                        <h3 style="margin: 0; font-size: 1.25rem;">Quick Actions</h3>
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;">
+                    <div class="feature-card" style="padding: 20px; cursor: pointer;" onclick="window.location.href='/scholarships.html'">
+                        <div class="feature-icon-box" style="width: 44px; height: 44px; font-size: 18px; margin-bottom: 14px;">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <h4 style="margin-bottom: 6px; font-size: 1.05rem;">Search Catalog</h4>
+                        <p style="font-size: 13px; margin: 0; color: var(--text-secondary);">Browse all available scholarship schemes.</p>
+                    </div>
+
+                    <div class="feature-card" style="padding: 20px; cursor: pointer;" onclick="window.location.href='/my-applications'">
+                        <div class="feature-icon-box" style="width: 44px; height: 44px; font-size: 18px; margin-bottom: 14px; background: rgba(5,150,105,0.08); color: var(--emerald-accent); border-color: rgba(5,150,105,0.2);">
+                            <i class="fas fa-list-check"></i>
+                        </div>
+                        <h4 style="margin-bottom: 6px; font-size: 1.05rem;">Track Submissions</h4>
+                        <p style="font-size: 13px; margin: 0; color: var(--text-secondary);">Check status and review notes on applications.</p>
+                    </div>
+
+                    <div class="feature-card" style="padding: 20px; cursor: pointer;" onclick="showEligibilityChecker()">
+                        <div class="feature-icon-box" style="width: 44px; height: 44px; font-size: 18px; margin-bottom: 14px; background: rgba(217,119,6,0.08); color: var(--gold-accent); border-color: rgba(217,119,6,0.2);">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <h4 style="margin-bottom: 6px; font-size: 1.05rem;">Check Eligibility</h4>
+                        <p style="font-size: 13px; margin: 0; color: var(--text-secondary);">See which scholarships you currently qualify for.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chart.js Application Pipeline Visualizer -->
+            <div style="background: var(--surface-color); border: 1px solid var(--border-color); border-radius: var(--radius-xl); padding: 32px; box-shadow: var(--shadow-subtle); display: flex; flex-direction: column; justify-content: space-between;">
+                <div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                        <h3 style="margin: 0; font-size: 1.25rem;">Applications Overview</h3>
+                        <span style="font-size: 12px; color: var(--text-muted); font-weight: 600;">Status Breakdown</span>
+                    </div>
+                    <div style="position: relative; height: 180px; width: 100%; display: flex; justify-content: center; align-items: center;">
+                        <canvas id="applicationsChart"></canvas>
+                    </div>
+                </div>
+                <div style="display: flex; justify-content: space-around; text-align: center; border-top: 1px solid var(--border-color); padding-top: 14px; margin-top: 14px;">
+                    <div>
+                        <div style="font-size: 11.5px; color: var(--text-muted); font-weight: 600; text-transform: uppercase;">In Progress</div>
+                        <div style="font-weight: 800; color: var(--brand-blue); font-size: 16px;" id="chartActiveStat">0</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 11.5px; color: var(--text-muted); font-weight: 600; text-transform: uppercase;">Approved</div>
+                        <div style="font-weight: 800; color: var(--emerald-accent); font-size: 16px;" id="chartApprovedStat">0</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 11.5px; color: var(--text-muted); font-weight: 600; text-transform: uppercase;">Saved</div>
+                        <div style="font-weight: 800; color: var(--gold-accent); font-size: 16px;" id="chartSavedStat">0</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section: Personalized Recommendations -->
+        <div style="margin-bottom: 56px;" data-aos="fade-up">
+            <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 24px;">
+                <div>
+                    <h2 style="font-size: 1.55rem; margin-bottom: 4px;">Recommended For You</h2>
+                    <p style="color: var(--text-secondary); margin: 0; font-size: 14px;">Matches based on your percentage, level, and category</p>
+                </div>
+                <a href="/scholarships.html" class="btn btn-sm btn-outline">View All</a>
+            </div>
+
+            <div class="scholarships-grid" id="recommendedScholarships">
+                <div class="empty-state" style="grid-column: 1 / -1; text-align: center; padding: 48px;">
+                    <span class="loading"></span>
+                    <p style="margin-top: 12px; color: var(--text-secondary);">Finding scholarships for you...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section: Bookmarked Wishlist -->
+        <div style="margin-bottom: 40px;" data-aos="fade-up">
+            <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 24px;">
+                <div>
+                    <h2 style="font-size: 1.55rem; margin-bottom: 4px;">Saved Scholarships</h2>
+                    <p style="color: var(--text-secondary); margin: 0; font-size: 14px;">Scholarships you have bookmarked to review or apply to later</p>
+                </div>
+            </div>
+
+            <div class="scholarships-grid" id="bookmarkedList">
+                <div class="empty-state" style="grid-column: 1 / -1; text-align: center; padding: 48px;">
+                    <span class="loading"></span>
+                    <p style="margin-top: 12px; color: var(--text-secondary);">Loading your saved list...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Eligibility Modal -->
+<div class="modal" id="eligibilityModal" role="dialog" aria-modal="true" aria-labelledby="modalEligTitle">
+    <div class="modal-content" style="max-width: 680px;">
+        <div class="modal-header">
+            <h3 id="modalEligTitle" style="margin: 0; font-size: 1.35rem;">Eligibility Checker</h3>
+            <button class="modal-close" onclick="closeEligibilityModal()" aria-label="Close modal">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="modal-body" style="padding: 28px;">
+            <div id="eligibilityResults">
+                <p style="text-align: center; padding: 30px;"><span class="loading"></span> Checking your eligibility...</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="{{ url_for('static', filename='js/student_dashboard.js') }}"></script>
+{% endblock %}

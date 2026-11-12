@@ -1,0 +1,202 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}Sign Up - Student Saarthi{% endblock %}
+
+{% block content %}
+<div class="auth-page-wrapper" style="padding: 60px 20px;">
+    <div class="auth-glass-card" style="max-width: 840px;" data-aos="zoom-in">
+        <div class="auth-header">
+            <h2 style="font-size: 2rem; letter-spacing: -0.02em; color: var(--text-primary); margin-bottom: 8px; font-weight: 800;">
+                Create Your Student Account
+            </h2>
+            <p style="margin: 0; color: var(--text-secondary); font-size: 14.5px;">
+                Discover and apply for scholarships across India tailored to your background.
+            </p>
+        </div>
+
+        <!-- Alert Notification Messages -->
+        <div id="errorMessage" class="error-message" style="display: none; background: rgba(220, 38, 38, 0.08); padding: 12px 16px; border-radius: var(--radius-md); margin-bottom: 24px; border-left: 3px solid var(--error-color); color: var(--error-color); font-size: 13.5px; font-weight: 600;"></div>
+        <div id="successMessage" class="success-message" style="display: none; background: rgba(5, 150, 105, 0.08); padding: 12px 16px; border-radius: var(--radius-md); margin-bottom: 24px; border-left: 3px solid var(--emerald-accent); color: var(--emerald-accent); font-size: 13.5px; font-weight: 600;"></div>
+
+        <form id="signupForm">
+            <!-- Section 1: Personal Details -->
+            <div style="margin-bottom: 32px;">
+                <h3 style="font-size: 1.15rem; margin-bottom: 18px; color: var(--text-primary); display: flex; align-items: center; gap: 10px;">
+                    <span class="step-number-ring" style="width: 26px; height: 26px; font-size: 12px; margin: 0;">1</span>
+                    Personal Information
+                </h3>
+                
+                <div class="form-group">
+                    <label for="fullName">Full Name (as per ID or Marksheet) *</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-user"></i>
+                        <input type="text" id="fullName" placeholder="e.g. Rahul Sharma" required minlength="2" maxlength="100">
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px;">
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" id="email" placeholder="rahul@example.com" required autocomplete="email">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">10-Digit Mobile Number *</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-phone"></i>
+                            <input type="tel" id="phone" placeholder="9876543210" required pattern="[0-9]{10}">
+                        </div>
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px;">
+                    <div class="form-group">
+                        <label for="password">Create Password *</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="password" placeholder="At least 6 characters" required minlength="6" autocomplete="new-password">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirm Password *</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-shield-alt"></i>
+                            <input type="password" id="confirmPassword" placeholder="Re-enter password" required autocomplete="new-password">
+                        </div>
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px;">
+                    <div class="form-group">
+                        <label for="dob">Date of Birth *</label>
+                        <input type="date" id="dob" required style="padding: 12px 16px; border: 1px solid var(--border-color); border-radius: var(--radius-md); width: 100%; background: var(--surface-color); color: var(--text-primary);">
+                    </div>
+                    <div class="form-group">
+                        <label for="gender">Gender *</label>
+                        <select id="gender" required style="padding: 12px 16px; border: 1px solid var(--border-color); border-radius: var(--radius-md); width: 100%; background: var(--surface-color); color: var(--text-primary);">
+                            <option value="">Select Gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="address">Permanent Address (Optional)</label>
+                    <textarea id="address" placeholder="Address, City, State, PIN Code" style="min-height: 60px; padding: 12px 16px; border: 1px solid var(--border-color); border-radius: var(--radius-md); width: 100%; background: var(--surface-color); color: var(--text-primary); font-family: inherit; font-size: 14px;"></textarea>
+                </div>
+            </div>
+
+            <!-- Section 2: Academic Profile -->
+            <div style="margin-bottom: 32px; border-top: 1px solid var(--border-color); padding-top: 28px;">
+                <h3 style="font-size: 1.15rem; margin-bottom: 18px; color: var(--text-primary); display: flex; align-items: center; gap: 10px;">
+                    <span class="step-number-ring" style="width: 26px; height: 26px; font-size: 12px; margin: 0;">2</span>
+                    Academic Details
+                </h3>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px;">
+                    <div class="form-group">
+                        <label for="educationLevel">Current Education Level *</label>
+                        <select id="educationLevel" required style="padding: 12px 16px; border: 1px solid var(--border-color); border-radius: var(--radius-md); width: 100%; background: var(--surface-color); color: var(--text-primary);">
+                            <option value="">Select Education Level</option>
+                            <option value="Class 10">Class 10</option>
+                            <option value="Class 12">Class 12</option>
+                            <option value="Diploma">Diploma / Polytechnic</option>
+                            <option value="Undergraduate">Undergraduate (Degree)</option>
+                            <option value="Postgraduate">Postgraduate (Masters)</option>
+                            <option value="PhD">Ph.D. / Research</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="academicPercentage">Latest Academic Percentage (%) *</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-percent"></i>
+                            <input type="number" id="academicPercentage" placeholder="e.g. 84.5" required min="40" max="100" step="0.01">
+                        </div>
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px;">
+                    <div class="form-group">
+                        <label for="fieldOfStudy">Stream / Discipline *</label>
+                        <input type="text" id="fieldOfStudy" placeholder="e.g. Computer Science, Science, Commerce" required style="padding: 12px 16px; border: 1px solid var(--border-color); border-radius: var(--radius-md); width: 100%; background: var(--surface-color); color: var(--text-primary);">
+                    </div>
+                    <div class="form-group">
+                        <label for="institutionName">School / College / University *</label>
+                        <input type="text" id="institutionName" placeholder="Institution name" required style="padding: 12px 16px; border: 1px solid var(--border-color); border-radius: var(--radius-md); width: 100%; background: var(--surface-color); color: var(--text-primary);">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="graduationYear">Expected Completion Year *</label>
+                    <input type="number" id="graduationYear" placeholder="e.g. 2026" required min="2024" max="2035" style="padding: 12px 16px; border: 1px solid var(--border-color); border-radius: var(--radius-md); width: 100%; background: var(--surface-color); color: var(--text-primary);">
+                </div>
+            </div>
+
+            <!-- Section 3: Socio-Economic Profile -->
+            <div style="margin-bottom: 32px; border-top: 1px solid var(--border-color); padding-top: 28px;">
+                <h3 style="font-size: 1.15rem; margin-bottom: 18px; color: var(--text-primary); display: flex; align-items: center; gap: 10px;">
+                    <span class="step-number-ring" style="width: 26px; height: 26px; font-size: 12px; margin: 0;">3</span>
+                    Category & Income
+                </h3>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px;">
+                    <div class="form-group">
+                        <label for="category">Category *</label>
+                        <select id="category" required style="padding: 12px 16px; border: 1px solid var(--border-color); border-radius: var(--radius-md); width: 100%; background: var(--surface-color); color: var(--text-primary);">
+                            <option value="">Select Category</option>
+                            <option value="General">General / Unreserved</option>
+                            <option value="OBC">OBC (Other Backward Class)</option>
+                            <option value="SC-ST">SC / ST</option>
+                            <option value="Minority">Minority Community</option>
+                            <option value="Pwd">Person with Disability (PwD)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="annualIncome">Annual Family Income *</label>
+                        <select id="annualIncome" required style="padding: 12px 16px; border: 1px solid var(--border-color); border-radius: var(--radius-md); width: 100%; background: var(--surface-color); color: var(--text-primary);">
+                            <option value="">Select Income Bracket</option>
+                            <option value="100000">Below ₹1 Lakh</option>
+                            <option value="250000">₹1 Lakh - ₹2.5 Lakhs</option>
+                            <option value="500000">₹2.5 Lakhs - ₹5 Lakhs</option>
+                            <option value="800000">₹5 Lakhs - ₹8 Lakhs</option>
+                            <option value="1000000">Above ₹8 Lakhs</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="specialCircumstances">Special Conditions (Optional)</label>
+                    <textarea id="specialCircumstances" placeholder="Single-parent household, sports achievements, disability details..." style="min-height: 60px; padding: 12px 16px; border: 1px solid var(--border-color); border-radius: var(--radius-md); width: 100%; background: var(--surface-color); color: var(--text-primary); font-family: inherit; font-size: 14px;"></textarea>
+                </div>
+            </div>
+
+            <!-- Terms Declaration -->
+            <div style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 18px; margin-bottom: 28px;">
+                <label style="display: flex; align-items: flex-start; gap: 12px; cursor: pointer;">
+                    <input type="checkbox" id="agreeTerms" required style="margin-top: 3px; accent-color: var(--brand-blue); width: 18px; height: 18px;">
+                    <span style="font-size: 13.5px; color: var(--text-primary); line-height: 1.6;">
+                        I agree to the <a href="/termOfServices.html" target="_blank" style="color: var(--brand-blue); font-weight: 600;">Terms of Service</a> and <a href="/PrivacyPolicy.html" target="_blank" style="color: var(--brand-blue); font-weight: 600;">Privacy Policy</a>. I confirm that all submitted details are true and accurate.
+                    </span>
+                </label>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;">
+                <i class="fas fa-user-plus"></i> Create Student Account
+            </button>
+        </form>
+
+        <p style="text-align: center; margin-top: 28px; color: var(--text-secondary); font-size: 14px;">
+            Already have an account? 
+            <a href="/login.html" style="color: var(--brand-blue); font-weight: 700;">Login here</a>
+        </p>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="{{ url_for('static', filename='js/signup.js') }}"></script>
+{% endblock %}

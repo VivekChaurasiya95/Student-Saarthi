@@ -1,0 +1,202 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}Admin Control Panel - Student Saarthi{% endblock %}
+
+{% block content %}
+<div class="dashboard-page-container">
+    <div class="container">
+        
+        <!-- Header Bar -->
+        <div class="dashboard-header-bar" data-aos="fade-down">
+            <div>
+                <h1 style="font-size: clamp(1.8rem, 3.5vw, 2.5rem); margin-bottom: 6px; font-weight: 800; letter-spacing: -0.02em;">
+                    Admin Dashboard
+                </h1>
+                <p style="margin: 0; color: var(--text-secondary); font-size: 15px;">
+                    Signed in as <strong id="adminName" style="color: var(--brand-blue);">Administrator</strong> &bull; Manage scholarships and student applications.
+                </p>
+            </div>
+            <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+                <button class="btn btn-primary" onclick="showAddScholarshipModal()">
+                    <i class="fas fa-plus"></i> Add New Scholarship
+                </button>
+            </div>
+        </div>
+
+        <!-- Telemetry KPI Grid -->
+        <div class="dashboard-stats-grid" data-aos="fade-up" data-aos-delay="50">
+            <div class="stat-card-executive">
+                <div>
+                    <div class="stat-metric-value" id="totalScholarships">0</div>
+                    <div class="stat-metric-label">Active Scholarships</div>
+                </div>
+                <div class="stat-icon-container stat-icon-blue">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+            </div>
+
+            <div class="stat-card-executive">
+                <div>
+                    <div class="stat-metric-value" id="totalStudents">0</div>
+                    <div class="stat-metric-label">Registered Students</div>
+                </div>
+                <div class="stat-icon-container stat-icon-emerald">
+                    <i class="fas fa-users"></i>
+                </div>
+            </div>
+
+            <div class="stat-card-executive">
+                <div>
+                    <div class="stat-metric-value" id="totalApplications">0</div>
+                    <div class="stat-metric-label">Total Applications</div>
+                </div>
+                <div class="stat-icon-container stat-icon-blue">
+                    <i class="fas fa-file-invoice"></i>
+                </div>
+            </div>
+
+            <div class="stat-card-executive">
+                <div>
+                    <div class="stat-metric-value" id="pendingApplications">0</div>
+                    <div class="stat-metric-label">Pending Review</div>
+                </div>
+                <div class="stat-icon-container stat-icon-amber">
+                    <i class="fas fa-hourglass-half"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Administrative Analytics Chart Box -->
+        <div style="background: var(--surface-color); border: 1px solid var(--border-color); border-radius: var(--radius-xl); padding: 32px; box-shadow: var(--shadow-subtle); margin-bottom: 40px;" data-aos="fade-up" data-aos-delay="100">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 12px;">
+                <div>
+                    <h3 style="margin: 0; font-size: 1.25rem;">Applications by Status</h3>
+                    <p style="margin: 2px 0 0; font-size: 13.5px; color: var(--text-secondary);">Overview of student submissions currently in review</p>
+                </div>
+            </div>
+            <div style="position: relative; height: 220px; width: 100%;">
+                <canvas id="adminAnalyticsChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Student Applications Moderation Table -->
+        <div class="table-card" data-aos="fade-up" data-aos-delay="150">
+            <div class="table-card-header">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <i class="fas fa-list-check" style="color: var(--brand-blue); font-size: 18px;"></i>
+                    <h3 style="margin: 0; font-size: 1.2rem;">Student Applications</h3>
+                </div>
+                <span class="status-pill status-submitted" id="adminAppCounter">Loading...</span>
+            </div>
+
+            <div class="table-responsive">
+                <table class="custom-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Student</th>
+                            <th>Scholarship</th>
+                            <th>Date Applied</th>
+                            <th>Status</th>
+                            <th style="text-align: right;">Update Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="applicationsTable">
+                        <tr>
+                            <td colspan="6" style="text-align: center; padding: 48px;">
+                                <span class="loading"></span>
+                                <p style="margin-top: 12px; color: var(--text-secondary); font-size: 14px;">Loading applications...</p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal: Add New Scholarship Program -->
+<div class="modal" id="addScholarshipModal" role="dialog" aria-modal="true" aria-labelledby="modalAddSchTitle">
+    <div class="modal-content" style="max-width: 800px;">
+        <div class="modal-header">
+            <h3 id="modalAddSchTitle" style="margin: 0; font-size: 1.35rem;">Add New Scholarship</h3>
+            <button class="modal-close" onclick="closeAddScholarshipModal()" aria-label="Close modal">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="modal-body" style="padding: 28px;">
+            <form id="addScholarshipForm">
+                <div class="form-group">
+                    <label for="schName">Scholarship Title *</label>
+                    <input type="text" id="schName" placeholder="e.g. National Merit Higher Education Scholarship" required style="padding: 12px 16px; border: 1px solid var(--border-color); border-radius: var(--radius-md); width: 100%; background: var(--surface-color); color: var(--text-primary);">
+                </div>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px;">
+                    <div class="form-group">
+                        <label for="schProvider">Funding Provider / Ministry *</label>
+                        <input type="text" id="schProvider" placeholder="e.g. Ministry of Education / Corporate Name" required style="padding: 12px 16px; border: 1px solid var(--border-color); border-radius: var(--radius-md); width: 100%; background: var(--surface-color); color: var(--text-primary);">
+                    </div>
+                    <div class="form-group">
+                        <label for="schAmount">Award Amount (₹) *</label>
+                        <input type="number" id="schAmount" placeholder="e.g. 50000" min="1" required style="padding: 12px 16px; border: 1px solid var(--border-color); border-radius: var(--radius-md); width: 100%; background: var(--surface-color); color: var(--text-primary);">
+                    </div>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px;">
+                    <div class="form-group">
+                        <label for="schCategory">Category *</label>
+                        <input type="text" id="schCategory" placeholder="e.g. Academic, SC-ST, Women, Central" required style="padding: 12px 16px; border: 1px solid var(--border-color); border-radius: var(--radius-md); width: 100%; background: var(--surface-color); color: var(--text-primary);">
+                    </div>
+                    <div class="form-group">
+                        <label for="schMinPercentage">Minimum Percentage (%)</label>
+                        <input type="number" id="schMinPercentage" min="0" max="100" step="0.1" placeholder="e.g. 60" style="padding: 12px 16px; border: 1px solid var(--border-color); border-radius: var(--radius-md); width: 100%; background: var(--surface-color); color: var(--text-primary);">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="schDescription">Description *</label>
+                    <textarea id="schDescription" placeholder="Explain the objective, benefits, and rules..." required style="min-height: 100px; padding: 12px 16px; border: 1px solid var(--border-color); border-radius: var(--radius-md); width: 100%; background: var(--surface-color); color: var(--text-primary); font-family: inherit; font-size: 14px;"></textarea>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px;">
+                    <div class="form-group">
+                        <label for="schEducation">Education Levels (comma-separated)</label>
+                        <input type="text" id="schEducation" placeholder="Class 12, Undergraduate, Postgraduate" style="padding: 12px 16px; border: 1px solid var(--border-color); border-radius: var(--radius-md); width: 100%; background: var(--surface-color); color: var(--text-primary);">
+                    </div>
+                    <div class="form-group">
+                        <label for="schDeadline">Application Deadline *</label>
+                        <input type="date" id="schDeadline" required style="padding: 12px 16px; border: 1px solid var(--border-color); border-radius: var(--radius-md); width: 100%; background: var(--surface-color); color: var(--text-primary);">
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px;">
+                    <div class="form-group">
+                        <label for="schMaxIncome">Max Family Income (₹/year)</label>
+                        <input type="number" id="schMaxIncome" placeholder="e.g. 600000" style="padding: 12px 16px; border: 1px solid var(--border-color); border-radius: var(--radius-md); width: 100%; background: var(--surface-color); color: var(--text-primary);">
+                    </div>
+                    <div class="form-group">
+                        <label for="schOfficialUrl">Official Website Link</label>
+                        <input type="url" id="schOfficialUrl" placeholder="https://scholarships.gov.in" style="padding: 12px 16px; border: 1px solid var(--border-color); border-radius: var(--radius-md); width: 100%; background: var(--surface-color); color: var(--text-primary);">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="schDocuments">Required Documents (comma-separated)</label>
+                    <textarea id="schDocuments" placeholder="Marksheet, Income Certificate, Aadhaar Card" style="min-height: 70px; padding: 12px 16px; border: 1px solid var(--border-color); border-radius: var(--radius-md); width: 100%; background: var(--surface-color); color: var(--text-primary); font-family: inherit; font-size: 14px;"></textarea>
+                </div>
+                
+                <div style="display: flex; gap: 14px; margin-top: 24px;">
+                    <button type="button" class="btn btn-outline" onclick="closeAddScholarshipModal()" style="flex: 1;">Cancel</button>
+                    <button type="submit" class="btn btn-primary" style="flex: 2;">
+                        <i class="fas fa-plus"></i> Add Scholarship
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="{{ url_for('static', filename='js/admin_dashboard.js') }}"></script>
+{% endblock %}

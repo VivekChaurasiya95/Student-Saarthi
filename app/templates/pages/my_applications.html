@@ -1,0 +1,123 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}My Applications - Student Saarthi{% endblock %}
+
+{% block content %}
+<div class="dashboard-page-container">
+    <div class="container">
+        
+        <!-- Header Bar -->
+        <div class="dashboard-header-bar" data-aos="fade-down">
+            <div>
+                <h1 style="font-size: clamp(1.8rem, 3.5vw, 2.5rem); margin-bottom: 6px; font-weight: 800; letter-spacing: -0.02em;">
+                    My Applications
+                </h1>
+                <p style="margin: 0; color: var(--text-secondary); font-size: 15px;">
+                    Track the status of your submitted scholarship applications.
+                </p>
+            </div>
+            <div>
+                <a href="/scholarships.html" class="btn btn-primary">
+                    <i class="fas fa-search"></i> Find More Scholarships
+                </a>
+            </div>
+        </div>
+
+        <!-- Telemetry KPI Grid -->
+        <div class="dashboard-stats-grid" data-aos="fade-up" data-aos-delay="50">
+            <div class="stat-card-executive">
+                <div>
+                    <div class="stat-metric-value" id="submittedCount">0</div>
+                    <div class="stat-metric-label">Submitted</div>
+                </div>
+                <div class="stat-icon-container stat-icon-blue">
+                    <i class="fas fa-clock"></i>
+                </div>
+            </div>
+
+            <div class="stat-card-executive">
+                <div>
+                    <div class="stat-metric-value" id="reviewCount">0</div>
+                    <div class="stat-metric-label">Under Review</div>
+                </div>
+                <div class="stat-icon-container stat-icon-amber">
+                    <i class="fas fa-magnifying-glass"></i>
+                </div>
+            </div>
+
+            <div class="stat-card-executive">
+                <div>
+                    <div class="stat-metric-value" id="approvedCount">0</div>
+                    <div class="stat-metric-label">Approved</div>
+                </div>
+                <div class="stat-icon-container stat-icon-emerald">
+                    <i class="fas fa-circle-check"></i>
+                </div>
+            </div>
+
+            <div class="stat-card-executive">
+                <div>
+                    <div class="stat-metric-value" id="rejectedCount">0</div>
+                    <div class="stat-metric-label">Rejected</div>
+                </div>
+                <div class="stat-icon-container stat-icon-red">
+                    <i class="fas fa-circle-xmark"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Applications Table Card -->
+        <div class="table-card" data-aos="fade-up" data-aos-delay="100">
+            <div class="table-card-header">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <i class="fas fa-folder" style="color: var(--brand-blue); font-size: 18px;"></i>
+                    <h3 style="margin: 0; font-size: 1.2rem;">Submitted Applications</h3>
+                </div>
+                <span class="status-pill status-submitted" id="applicationsCounter">Loading...</span>
+            </div>
+
+            <div class="table-responsive">
+                <table class="custom-table">
+                    <thead>
+                        <tr>
+                            <th>Application ID</th>
+                            <th>Scholarship</th>
+                            <th>Amount</th>
+                            <th>Date Applied</th>
+                            <th>Status</th>
+                            <th style="text-align: right;">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="applicationsTable">
+                        <tr>
+                            <td colspan="6" style="text-align: center; padding: 48px;">
+                                <span class="loading"></span>
+                                <p style="margin-top: 12px; color: var(--text-secondary); font-size: 14px;">Loading your applications...</p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Application Details Modal -->
+<div class="modal" id="appDetailModal" role="dialog" aria-modal="true" aria-labelledby="modalDetailTitle">
+    <div class="modal-content" style="max-width: 740px;">
+        <div class="modal-header">
+            <h3 id="modalDetailTitle" style="margin: 0; font-size: 1.35rem;">Application Details</h3>
+            <button class="modal-close" onclick="closeAppDetailModal()" aria-label="Close modal">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="modal-body" id="appDetailModalBody" style="padding: 28px;">
+            <p style="text-align: center; padding: 30px;"><span class="loading"></span> Loading details...</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="{{ url_for('static', filename='js/my_applications.js') }}"></script>
+{% endblock %}

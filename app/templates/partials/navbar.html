@@ -1,0 +1,128 @@
+<nav class="navbar">
+    <div class="nav-container">
+        <a href="/" class="logo">
+            <span class="logo-icon-box">
+                <i class="fas fa-graduation-cap"></i>
+            </span>
+            <span class="logo-text">Student<span class="brand-gradient">Saarthi</span></span>
+        </a>
+        
+        <ul class="nav-menu" id="navMenu">
+            <li><a href="/" class="nav-link {% if request.path == '/' or request.path == '/index.html' %}active{% endif %}">Home</a></li>
+            <li><a href="/scholarships.html" class="nav-link {% if 'scholarship' in request.path and 'admin' not in request.path %}active{% endif %}">Scholarships</a></li>
+            <li><a href="/about.html" class="nav-link {% if 'about' in request.path %}active{% endif %}">About Us</a></li>
+            <li><a href="/contact.html" class="nav-link {% if 'contact' in request.path %}active{% endif %}">Contact</a></li>
+            <li><a href="/helpCentre.html" class="nav-link {% if 'help' in request.path %}active{% endif %}">Help & FAQ</a></li>
+        </ul>
+        
+        <div class="nav-actions" id="navActions">
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                <i class="fas fa-moon"></i>
+            </button>
+            {% if session.get('user_id') %}
+                <a href="/student-dashboard.html" class="btn btn-outline nav-user-pill" id="navUserPill">
+                    <span class="avatar-dot"></span>
+                    <span id="navUserName">{{ (session.get('user_name') or 'Student').split(' ')[0] }}</span>
+                    <i class="fas fa-chevron-right" style="font-size: 10px; margin-left: 4px; opacity: 0.6;"></i>
+                </a>
+                <button class="btn btn-ghost btn-sm" onclick="logout()" title="Sign out" id="navLogoutBtn">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+            {% elif session.get('admin_id') %}
+                <a href="/admin-dashboard.html" class="btn btn-outline nav-user-pill" id="navUserPill">
+                    <span class="avatar-dot"></span>
+                    <span id="navUserName">{{ (session.get('admin_username') or 'Admin').split(' ')[0] }}</span>
+                    <i class="fas fa-chevron-right" style="font-size: 10px; margin-left: 4px; opacity: 0.6;"></i>
+                </a>
+                <button class="btn btn-ghost btn-sm" onclick="logout()" title="Sign out" id="navLogoutBtn">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+            {% else %}
+                <a href="/login.html" class="btn btn-ghost" id="navLoginBtn">Log in</a>
+                <a href="/signup.html" class="btn btn-primary" id="navSignupBtn">Get Started <i class="fas fa-arrow-right"></i></a>
+            {% endif %}
+        </div>
+        
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle mobile menu">
+            <i class="fas fa-bars"></i>
+        </button>
+    </div>
+</nav>
+
+<script>
+    // Immediate icon sync to prevent theme toggle flicker
+    (function() {
+        var theme = localStorage.getItem('theme') || 'light';
+        var icon = document.querySelector('#themeToggle i');
+        if (icon && theme === 'dark') {
+            icon.className = 'fas fa-sun';
+        }
+    })();
+
+    // Singleton Session Verification to prevent redundant requests across components
+    window.getAppSession = window.getAppSession || function() {
+        if (!window._appSessionPromise) {
+            const endpoint = (window.API_URL || (window.location.origin + '/api')) + '/check-session';
+            window._appSessionPromise = fetch(endpoint, { credentials: 'include' })
+                .then(res => res.ok ? res.json() : { loggedIn: false })
+                .catch(() => ({ loggedIn: false }));
+        }
+        return window._appSessionPromise;
+    };
+
+    // Reconcile client session without causing navbar flicker
+    document.addEventListener('DOMContentLoaded', async () => {
+        try {
+            const data = await window.getAppSession();
+            const navActions = document.getElementById('navActions');
+            if (!navActions) return;
+
+            const hasPill = !!document.getElementById('navUserPill');
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+
+            // If server-rendered state matches client session, DO NOT re-render innerHTML!
+            // This eliminates any state transition flicker on tab clicks.
+            if (data && data.loggedIn && hasPill) {
+                const nameSpan = document.getElementById('navUserName');
+                const displayName = data.userName || data.username;
+                if (nameSpan && displayName) {
+                    nameSpan.textContent = displayName.split(' ')[0];
+                }
+                return;
+            }
+            if ((!data || !data.loggedIn) && !hasPill) {
+                return;
+            }
+
+            // Only update DOM if session state genuinely transitioned
+            if (data && data.loggedIn) {
+                const isStudent = data.type === 'user';
+                const dashUrl = isStudent ? '/student-dashboard.html' : '/admin-dashboard.html';
+                const displayName = data.userName || data.username || (isStudent ? 'Student' : 'Admin');
+                navActions.innerHTML = `
+                    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                        <i class="fas fa-${isDark ? 'sun' : 'moon'}"></i>
+                    </button>
+                    <a href="${dashUrl}" class="btn btn-outline nav-user-pill" id="navUserPill">
+                        <span class="avatar-dot"></span>
+                        <span id="navUserName">${displayName.split(' ')[0]}</span>
+                        <i class="fas fa-chevron-right" style="font-size: 10px; margin-left: 4px; opacity: 0.6;"></i>
+                    </a>
+                    <button class="btn btn-ghost btn-sm" onclick="logout()" title="Sign out" id="navLogoutBtn">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </button>
+                `;
+            } else {
+                navActions.innerHTML = `
+                    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                        <i class="fas fa-${isDark ? 'sun' : 'moon'}"></i>
+                    </button>
+                    <a href="/login.html" class="btn btn-ghost" id="navLoginBtn">Log in</a>
+                    <a href="/signup.html" class="btn btn-primary" id="navSignupBtn">Get Started <i class="fas fa-arrow-right"></i></a>
+                `;
+            }
+        } catch (e) {
+            // Silently keep current state
+        }
+    });
+</script>

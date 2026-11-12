@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Student Saarthi - Scholarship Portal{% endblock %}</title>
+    
+    <!-- Google Fonts: Plus Jakarta Sans & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome 6.5.1 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- AOS (Animate On Scroll) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    
+    <!-- SweetAlert2 Modern Toasts & Dialogs -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.5/dist/sweetalert2.min.css">
+
+    <!-- Immediate Early Theme Detection (Eliminates Flash of Unstyled Theme) -->
+    <script>
+        (function() {
+            var theme = localStorage.getItem('theme') || 'light';
+            if (theme === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+        })();
+    </script>
+
+    <!-- Core Stylesheet -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}?v=2.3">
+    
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+    <!-- Navigation Bar -->
+    {% include 'partials/navbar.html' %}
+
+    <!-- Main Content Block -->
+    <main class="page-main-content">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    {% include 'partials/footer.html' %}
+
+    <!-- Third-Party UI Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.5/dist/sweetalert2.all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+    <!-- Base Configuration & Interactions -->
+    <script>
+        // Global API Endpoint Configuration
+        window.API_URL = window.location.origin + '/api';
+        var API_URL = window.API_URL;
+
+        // Singleton Session Verification (Prevents duplicate network requests)
+        window.getAppSession = window.getAppSession || function() {
+            if (!window._appSessionPromise) {
+                window._appSessionPromise = fetch(`${window.API_URL}/check-session`, { credentials: 'include' })
+                    .then(res => res.ok ? res.json() : { loggedIn: false })
+                    .catch(() => ({ loggedIn: false }));
+            }
+            return window._appSessionPromise;
+        };
+
+        // Initialize Animate On Scroll
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.AOS) {
+                AOS.init({
+                    duration: 650,
+                    easing: 'ease-out-cubic',
+                    once: true,
+                    offset: 40
+                });
+            }
+        });
+
+        // Modern Toast Notification Utility (via SweetAlert2)
+        window.showToast = function(title, icon = 'success') {
+            if (window.Swal) {
+                Swal.fire({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    icon: icon,
+                    title: title,
+                    customClass: {
+                        popup: 'premium-toast-popup'
+                    }
+                });
+            } else {
+                console.log(`[Toast ${icon}]: ${title}`);
+            }
+        };
+
+        // Universal Theme Toggle Delegator
+        document.addEventListener('click', (e) => {
+            const btn = e.target.closest('.theme-toggle');
+            if (!btn) return;
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            const nextTheme = isDark ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', nextTheme);
+            localStorage.setItem('theme', nextTheme);
+            document.querySelectorAll('.theme-toggle i').forEach(icon => {
+                icon.className = isDark ? 'fas fa-moon' : 'fas fa-sun';
+            });
+            window.showToast(`Switched to ${nextTheme} mode`, 'info');
+        });
+
+        // Mobile Navigation Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navMenu = document.getElementById('navMenu');
+        if (mobileMenuBtn && navMenu) {
+            mobileMenuBtn.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+                const icon = mobileMenuBtn.querySelector('i');
+                if (icon) {
+                    icon.classList.toggle('fa-bars');
+                    icon.classList.toggle('fa-times');
+                }
+            });
+        }
+
+        // Common Logout Function
+        async function logout() {
+            try {
+                window._appSessionPromise = null;
+                await fetch(`${API_URL}/logout`, { method: 'POST', credentials: 'include' });
+            } catch (err) {
+                console.error('Logout error:', err);
+            }
+            window.location.href = '/login.html';
+        }
+    </script>
+    {% block extra_scripts %}{% endblock %}
+</body>
+</html>
+
