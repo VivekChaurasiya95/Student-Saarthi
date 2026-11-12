@@ -5,7 +5,7 @@
 [![Flask](https://img.shields.io/badge/Flask-3.0.0-green.svg)](https://flask.palletsprojects.com/)
 [![SQLAlchemy](https://img.shields.io/badge/SQLAlchemy-2.0-red.svg)](https://www.sqlalchemy.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Tests](https://img.shields.io/badge/Tests-26%20Passed-brightgreen.svg)]()
+[![Tests](https://img.shields.io/badge/Tests-27%20Passed-brightgreen.svg)]()
 
 **Student Saarthi** is an enterprise-grade, full-stack scholarship discovery, matching, and application portal. It bridges the gap between deserving students across India and central, state, and private scholarship foundations by simplifying discovery, eligibility checks, document management, and application lifecycle tracking.
 
@@ -100,7 +100,7 @@ Student Saarthi/
 ├── static/                        # Frontend Static Assets
 │   ├── css/styles.css             # Theme-adaptive stylesheet
 │   └── js/                        # Modular client-side JavaScript controllers
-├── tests/                         # Pytest Automated Test Suite (26 Tests)
+├── tests/                         # Pytest Automated Test Suite (27 Tests)
 ├── .env.example                   # Environment variable template
 ├── .gitignore                     # Comprehensive git exclusion rules
 ├── LICENSE                        # MIT License

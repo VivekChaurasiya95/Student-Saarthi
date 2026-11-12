@@ -41,6 +41,12 @@ def terms_of_service():
     """Render Terms of Service page."""
     return render_template('pages/terms.html')
 
+@main_bp.route('/developers')
+@main_bp.route('/developers.html')
+def developers():
+    """Render Developers & Engineering Team page."""
+    return render_template('pages/developers.html')
+
 # ==================== PUBLIC API ENDPOINTS ====================
 
 @main_bp.route('/api/health', methods=['GET'])

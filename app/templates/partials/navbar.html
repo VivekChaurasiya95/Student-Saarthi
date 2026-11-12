@@ -11,6 +11,7 @@
             <li><a href="/" class="nav-link {% if request.path == '/' or request.path == '/index.html' %}active{% endif %}">Home</a></li>
             <li><a href="/scholarships.html" class="nav-link {% if 'scholarship' in request.path and 'admin' not in request.path %}active{% endif %}">Scholarships</a></li>
             <li><a href="/about.html" class="nav-link {% if 'about' in request.path %}active{% endif %}">About Us</a></li>
+            <li><a href="/developers.html" class="nav-link {% if 'developer' in request.path %}active{% endif %}">Developers</a></li>
             <li><a href="/contact.html" class="nav-link {% if 'contact' in request.path %}active{% endif %}">Contact</a></li>
             <li><a href="/helpCentre.html" class="nav-link {% if 'help' in request.path %}active{% endif %}">Help & FAQ</a></li>
         </ul>

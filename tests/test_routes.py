@@ -11,6 +11,8 @@ def test_public_pages_render(client):
         '/PrivacyPolicy.html',
         '/termOfServices.html',
         '/scholarships.html',
+        '/developers.html',
+        '/developers',
         '/login.html',
         '/signup.html'
     ]
@@ -59,4 +61,15 @@ def test_contact_submission(client):
     response = client.post('/api/contact', data=json.dumps(payload), content_type='application/json')
     assert response.status_code == 201
     assert response.get_json()['success'] is True
+
+def test_developers_page(client):
+    """Verify developers engineering team page contents."""
+    response = client.get('/developers.html')
+    assert response.status_code == 200
+    assert b'Core Engineering Contributors' in response.data
+    assert b'Vivek Chaurasiya' in response.data
+    assert b'Prajwal Patidar' in response.data
+    assert b'Atul Dehariya' in response.data
+    assert b'https://github.com/VivekChaurasiya95/Student-Saarthi' in response.data
+
 
