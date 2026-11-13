@@ -1,5 +1,5 @@
 from datetime import datetime
-from flask import Blueprint, render_template, jsonify
+from flask import Blueprint, render_template, jsonify, send_from_directory, current_app
 from app import db
 from app.services.scholarship_service import ScholarshipService
 
@@ -46,6 +46,16 @@ def terms_of_service():
 def developers():
     """Render Developers & Engineering Team page."""
     return render_template('pages/developers.html')
+
+@main_bp.route('/favicon.ico')
+def favicon():
+    """Serve root favicon for browsers."""
+    return send_from_directory(current_app.static_folder, 'favicon.ico', mimetype='image/vnd.microsoft.icon')
+
+@main_bp.route('/favicon.svg')
+def favicon_svg():
+    """Serve modern SVG favicon."""
+    return send_from_directory(current_app.static_folder, 'favicon.svg', mimetype='image/svg+xml')
 
 # ==================== PUBLIC API ENDPOINTS ====================
 

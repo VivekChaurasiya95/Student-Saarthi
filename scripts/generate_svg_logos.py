@@ -1,0 +1,132 @@
+import os
+
+OUT_DIR = r"D:\Student Saarthi\static\images\logo"
+
+# Full 512x512 app emblem SVG
+svg_content = '''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a1122" />
+      <stop offset="50%" stop-color="#050a14" />
+      <stop offset="100%" stop-color="#02050b" />
+    </linearGradient>
+
+    <!-- Royal Sapphire Gradient -->
+    <linearGradient id="capGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="40%" stop-color="#2563eb" />
+      <stop offset="100%" stop-color="#1d4ed8" />
+    </linearGradient>
+
+    <!-- Star Glow Gradient -->
+    <linearGradient id="starGradLight" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="50%" stop-color="#38bdf8" />
+      <stop offset="100%" stop-color="#06b6d4" />
+    </linearGradient>
+
+    <linearGradient id="starGradDark" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0284c7" />
+      <stop offset="100%" stop-color="#0f766e" />
+    </linearGradient>
+
+    <!-- Wing Gradients (Blue / Cyan) -->
+    <linearGradient id="wingBlueGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="60%" stop-color="#2563eb" />
+      <stop offset="100%" stop-color="#1e3a8a" />
+    </linearGradient>
+
+    <!-- Wing Gradients (Emerald / Mint) -->
+    <linearGradient id="wingGreenGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6ee7b7" />
+      <stop offset="50%" stop-color="#10b981" />
+      <stop offset="100%" stop-color="#047857" />
+    </linearGradient>
+
+    <!-- Shield Base Gradient -->
+    <linearGradient id="shieldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#06b6d4" />
+      <stop offset="100%" stop-color="#10b981" />
+    </linearGradient>
+
+    <!-- Glow Filter -->
+    <filter id="softGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Squircle Base with Subtle Border Glow -->
+  <rect width="512" height="512" rx="112" fill="url(#bgGrad)" />
+  <rect width="508" height="508" x="2" y="2" rx="110" fill="none" stroke="rgba(56, 189, 248, 0.2)" stroke-width="2" />
+
+  <!-- Ambient Light Behind Emblem -->
+  <circle cx="256" cy="265" r="110" fill="#2563eb" opacity="0.22" filter="url(#softGlow)" />
+  <circle cx="256" cy="270" r="60" fill="#06b6d4" opacity="0.35" filter="url(#softGlow)" />
+
+  <g transform="translate(0, 10)">
+    <!-- BOTTOM SHIELD CHEVRON -->
+    <path d="M 188 335 C 218 385, 240 405, 256 415 C 272 405, 294 385, 324 335 C 304 360, 275 385, 256 395 C 237 385, 208 360, 188 335 Z" fill="url(#shieldGrad)" />
+
+    <!-- LEFT UPLIFT WINGS -->
+    <!-- Outer Wing -->
+    <path d="M 108 145 C 104 220, 145 285, 256 385 C 190 320, 120 250, 108 145 Z" fill="url(#wingBlueGrad)" />
+    <!-- Middle Wing -->
+    <path d="M 105 210 C 115 265, 160 315, 256 375 C 175 325, 125 275, 105 210 Z" fill="url(#wingBlueGrad)" opacity="0.9" />
+    <!-- Inner Green Wing -->
+    <path d="M 132 280 C 158 322, 198 350, 256 365 C 195 348, 155 320, 132 280 Z" fill="url(#wingGreenGrad)" />
+
+    <!-- RIGHT UPLIFT WINGS (Symmetrical Mirror) -->
+    <!-- Outer Wing -->
+    <path d="M 404 145 C 408 220, 367 285, 256 385 C 322 320, 392 250, 404 145 Z" fill="url(#wingGreenGrad)" />
+    <!-- Middle Wing -->
+    <path d="M 407 210 C 397 265, 352 315, 256 375 C 337 325, 387 275, 407 210 Z" fill="url(#wingBlueGrad)" opacity="0.9" />
+    <!-- Inner Green Wing -->
+    <path d="M 380 280 C 354 322, 314 350, 256 365 C 317 348, 357 320, 380 280 Z" fill="url(#wingGreenGrad)" />
+
+    <!-- GRADUATION MORTARBOARD CAP -->
+    <!-- Cap Diamond Top -->
+    <polygon points="256,122 368,162 256,202 144,162" fill="url(#capGrad)" />
+    <!-- Cap Rim Highlight -->
+    <polyline points="144,162 256,202 368,162" fill="none" stroke="#67e8f9" stroke-width="3" stroke-linecap="round" />
+    
+    <!-- Cap Under Skull Cap Band -->
+    <path d="M 196 195 C 220 220, 292 220, 316 195 L 316 215 C 292 240, 220 240, 196 215 Z" fill="#1e3a8a" stroke="#0284c7" stroke-width="2" />
+
+    <!-- Tassel -->
+    <path d="M 256 162 L 166 182 L 166 220" fill="none" stroke="#38bdf8" stroke-width="3" stroke-linecap="round" />
+    <circle cx="166" cy="224" r="5" fill="#a7f3d0" />
+
+    <!-- CENTRAL GUIDING STAR (SAARTHI BEACON) -->
+    <!-- Top-Left Facet -->
+    <polygon points="256,192 256,270 200,270" fill="url(#starGradLight)" />
+    <!-- Top-Right Facet -->
+    <polygon points="256,192 312,270 256,270" fill="url(#starGradDark)" />
+    <!-- Bottom-Left Facet -->
+    <polygon points="200,270 256,270 256,348" fill="url(#starGradDark)" />
+    <!-- Bottom-Right Facet -->
+    <polygon points="256,270 312,270 256,348" fill="url(#starGradLight)" />
+
+    <!-- Center Star Spark -->
+    <circle cx="256" cy="270" r="4" fill="#ffffff" filter="url(#softGlow)" />
+  </g>
+</svg>
+'''
+
+svg_path = os.path.join(OUT_DIR, "logo-mark.svg")
+with open(svg_path, "w", encoding="utf-8") as f:
+    f.write(svg_content)
+print(f"Saved: {svg_path}")
+
+# Favicon SVG (standard square format)
+fav_svg_path = os.path.join(OUT_DIR, "favicon.svg")
+with open(fav_svg_path, "w", encoding="utf-8") as f:
+    f.write(svg_content)
+print(f"Saved: {fav_svg_path}")
+
+fav_root_svg = r"D:\Student Saarthi\static\favicon.svg"
+with open(fav_root_svg, "w", encoding="utf-8") as f:
+    f.write(svg_content)
+print(f"Saved: {fav_root_svg}")

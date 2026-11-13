@@ -33,6 +33,23 @@ def test_static_assets_serve(client):
     assert js_res.status_code == 200
     assert b'API_URL' in js_res.data
 
+def test_favicon_endpoints(client):
+    """Verify favicon.ico and favicon.svg endpoints return 200."""
+    ico_res = client.get('/favicon.ico')
+    assert ico_res.status_code == 200
+    assert len(ico_res.data) > 0
+    assert 'image/vnd.microsoft.icon' in ico_res.content_type or 'image/x-icon' in ico_res.content_type
+
+    svg_res = client.get('/favicon.svg')
+    assert svg_res.status_code == 200
+    assert b'<svg' in svg_res.data
+    assert 'image/svg+xml' in svg_res.content_type
+
+    logo_res = client.get('/static/images/logo/logo-512.png')
+    assert logo_res.status_code == 200
+    assert len(logo_res.data) > 0
+
+
 def test_health_check_endpoint(client):
     """Verify system health endpoint."""
     response = client.get('/api/health')
