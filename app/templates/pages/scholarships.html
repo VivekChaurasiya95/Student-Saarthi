@@ -126,14 +126,14 @@
 
 <!-- Scholarship Detail Modal -->
 <div class="modal" id="scholarshipModal" role="dialog" aria-modal="true" aria-labelledby="modalScholarshipTitle">
-    <div class="modal-content" style="max-width: 820px;">
+    <div class="modal-content modal-lg">
         <div class="modal-header">
-            <h3 id="modalScholarshipTitle" style="margin: 0; font-size: 1.35rem;">Scholarship Details</h3>
+            <h3 class="modal-title" id="modalScholarshipTitle">Scholarship Details</h3>
             <button class="modal-close" onclick="closeModal()" aria-label="Close modal">
                 <i class="fas fa-times"></i>
             </button>
         </div>
-        <div class="modal-body" id="modalBody" style="padding: 28px;">
+        <div class="modal-body" id="modalBody">
             <div style="text-align: center; padding: 40px;">
                 <span class="loading"></span>
                 <p style="margin-top: 12px; color: var(--text-secondary);">Loading scholarship details...</p>
@@ -144,5 +144,5 @@
 {% endblock %}
 
 {% block extra_scripts %}
-<script src="{{ url_for('static', filename='js/scholarships.js') }}?v=2.3"></script>
+<script src="{{ url_for('static', filename='js/scholarships.js') }}?v=2.4"></script>
 {% endblock %}

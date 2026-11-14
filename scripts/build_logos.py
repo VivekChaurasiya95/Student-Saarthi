@@ -96,3 +96,4 @@ print(f"Saved: {ico_path_static}")
 print(f"Saved: {ico_path_logo}")
 
 print("All raster logo assets successfully generated!")
+

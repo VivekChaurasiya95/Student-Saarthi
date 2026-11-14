@@ -221,13 +221,19 @@ async function updateApplicationStatus(applicationId, newStatus) {
 
 // Modal handling for Add Scholarship
 function showAddScholarshipModal() {
-    const modal = document.getElementById('addScholarshipModal');
-    if (modal) modal.classList.add('active');
+    if (window.openModalById) {
+        window.openModalById('addScholarshipModal');
+    } else {
+        document.getElementById('addScholarshipModal')?.classList.add('active');
+    }
 }
 
 function closeAddScholarshipModal() {
-    const modal = document.getElementById('addScholarshipModal');
-    if (modal) modal.classList.remove('active');
+    if (window.closeModalById) {
+        window.closeModalById('addScholarshipModal');
+    } else {
+        document.getElementById('addScholarshipModal')?.classList.remove('active');
+    }
 }
 
 document.addEventListener('DOMContentLoaded', async () => {

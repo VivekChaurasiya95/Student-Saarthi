@@ -225,13 +225,19 @@ function viewApplicationDetail(appId) {
         </div>
     `;
 
-    const modal = document.getElementById('appDetailModal');
-    if (modal) modal.classList.add('active');
+    if (window.openModalById) {
+        window.openModalById('appDetailModal');
+    } else {
+        document.getElementById('appDetailModal')?.classList.add('active');
+    }
 }
 
 function closeAppDetailModal() {
-    const modal = document.getElementById('appDetailModal');
-    if (modal) modal.classList.remove('active');
+    if (window.closeModalById) {
+        window.closeModalById('appDetailModal');
+    } else {
+        document.getElementById('appDetailModal')?.classList.remove('active');
+    }
 }
 
 document.addEventListener('DOMContentLoaded', async () => {

@@ -382,8 +382,11 @@ async function viewScholarshipDetails(scholarshipId) {
             </div>
         `;
 
-        const modal = document.getElementById('scholarshipModal');
-        if (modal) modal.classList.add('active');
+        if (window.openModalById) {
+            window.openModalById('scholarshipModal');
+        } else {
+            document.getElementById('scholarshipModal')?.classList.add('active');
+        }
     } catch (error) {
         console.error('Error fetching scholarship details:', error);
         window.showToast('Failed to load scholarship details', 'error');
@@ -392,8 +395,11 @@ async function viewScholarshipDetails(scholarshipId) {
 
 // Close details modal
 function closeModal() {
-    const modal = document.getElementById('scholarshipModal');
-    if (modal) modal.classList.remove('active');
+    if (window.closeModalById) {
+        window.closeModalById('scholarshipModal');
+    } else {
+        document.getElementById('scholarshipModal')?.classList.remove('active');
+    }
 }
 
 // Toggle Bookmark with Instant Toast Feedback

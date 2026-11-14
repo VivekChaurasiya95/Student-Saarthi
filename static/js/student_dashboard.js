@@ -259,7 +259,11 @@ function showEligibilityChecker() {
 
     if (!currentProfile) {
         resultsContainer.innerHTML = '<p style="color: var(--error-color);">Profile details not loaded yet. Please reload.</p>';
-        modal.classList.add('active');
+        if (window.openModalById) {
+            window.openModalById('eligibilityModal');
+        } else {
+            modal.classList.add('active');
+        }
         return;
     }
 
@@ -316,12 +320,19 @@ function showEligibilityChecker() {
         </div>
     `;
 
-    modal.classList.add('active');
+    if (window.openModalById) {
+        window.openModalById('eligibilityModal');
+    } else {
+        modal.classList.add('active');
+    }
 }
 
 function closeEligibilityModal() {
-    const modal = document.getElementById('eligibilityModal');
-    if (modal) modal.classList.remove('active');
+    if (window.closeModalById) {
+        window.closeModalById('eligibilityModal');
+    } else {
+        document.getElementById('eligibilityModal')?.classList.remove('active');
+    }
 }
 
 document.addEventListener('DOMContentLoaded', async () => {

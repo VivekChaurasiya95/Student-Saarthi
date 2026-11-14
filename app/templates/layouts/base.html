@@ -37,7 +37,7 @@
     </script>
 
     <!-- Core Stylesheet -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}?v=2.3">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}?v=2.5">
     
     {% block extra_head %}{% endblock %}
 </head>
@@ -133,6 +133,41 @@
                 }
             });
         }
+
+        // Shared Modal Overlay Helpers (scroll lock, reset, focus)
+        window.openModalById = function(modalId) {
+            const modal = document.getElementById(modalId);
+            if (!modal) return;
+            // Ensure modal escapes any parent stacking context by teleporting to body
+            if (modal.parentElement !== document.body) {
+                document.body.appendChild(modal);
+            }
+            modal.classList.add('active');
+            document.body.classList.add('modal-open');
+            modal.scrollTop = 0;
+            const modalBody = modal.querySelector('.modal-body');
+            if (modalBody) modalBody.scrollTop = 0;
+            const closeBtn = modal.querySelector('.modal-close');
+            if (closeBtn && typeof closeBtn.focus === 'function') {
+                closeBtn.focus({ preventScroll: true });
+            }
+        };
+
+        window.closeModalById = function(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) modal.classList.remove('active');
+            if (!document.querySelector('.modal.active')) {
+                document.body.classList.remove('modal-open');
+            }
+        };
+
+        // Universal Escape-to-close for every modal overlay
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && document.querySelector('.modal.active')) {
+                document.querySelectorAll('.modal.active').forEach(m => m.classList.remove('active'));
+                document.body.classList.remove('modal-open');
+            }
+        });
 
         // Common Logout Function
         async function logout() {
